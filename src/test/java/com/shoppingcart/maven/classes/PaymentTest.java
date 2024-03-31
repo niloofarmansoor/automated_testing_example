@@ -26,7 +26,13 @@ public class PaymentTest {
         assertEquals("Payment amount is invalid.", message);
     }
 
+    @Test
     public void testProcessPaymentFailure3() {
+        String message = Payment.processPayment(0.0, "MasterCard", "1234567890123456", "123", "01/25");
+        assertEquals("Payment amount is invalid.", message);
+    }
+
+    public void testProcessPaymentFailure4() {
         String message = Payment.processPayment(55.0, "MasterCard", "12345", "123", "02/23");
         assertEquals("Payment rejected due to wrong card information.", message);
     }

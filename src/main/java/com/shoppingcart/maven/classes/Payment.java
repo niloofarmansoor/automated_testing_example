@@ -20,7 +20,7 @@ public class Payment {
 		
 		if (cardCheck == true && amount > 0)
 	        return "Payment of $" + amount + " processed successfully.";
-		else if (cardCheck == true && amount <= 0)
+		else if (cardCheck == true && amount < 0)
 			return "Payment amount is invalid.";
 		else
 	        return "Payment rejected due to wrong card information.";
