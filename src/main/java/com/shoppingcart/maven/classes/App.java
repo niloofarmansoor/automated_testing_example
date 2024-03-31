@@ -17,21 +17,43 @@ public class App
     	cart.addItem(item2);
     	cart.addItem(item3);
     			
-    	        
     	//Display items in cart
     	cart.displayItems();
 
     	//Calculate and show total price
     	double total = cart.calculateTotal();
-    	System.out.println("Cart Total: $" + total);
     			
     			
     	//Process Payment
     	String message = Payment.processPayment(total, "Discover", 
     								"1445460152597412", 
     	        					"458", 
-    	        					"01/25");
+    	        					"01/25", 
+									false);
     	        
     	System.out.println(message);
+
+		System.out.println("Second run");
+
+		ShoppingCart cart2 = new ShoppingCart();
+    			
+    	//Add items to cart
+    	cart2.addItem(item1);
+    	cart2.addItem(item2);
+		cart2.addCouponToCart("Free");
+
+		cart2.displayItems();
+		
+    	double total2 = cart2.calculateTotal();
+
+
+    	String message2 = Payment.processPayment(total2, "Discover", 
+    								"1445460152597412", 
+    	        					"458", 
+    	        					"01/25",
+									true);
+    	        
+    	System.out.println(message2);
+		
     }
 }
