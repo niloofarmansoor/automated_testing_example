@@ -6,24 +6,30 @@ public class Payment {
 	private String cardNumber;
 	private String securityCode;
 	private String expirationDate;
-	
-	public Payment(String cardName, String cardNumber, String securityCode, String expirationDate) {
+	boolean couponActivated;
+
+	public Payment(String cardName, String cardNumber, String securityCode, String expirationDate, boolean couponActivated) {
 		this.cardName = cardName;
 		this.cardNumber = cardNumber;
 		this.securityCode = securityCode;
 		this.expirationDate = expirationDate;
+		this.couponActivated = couponActivated;
 	}
 	
-	public static String processPayment(double amount, String cardName, String cardNumber, String securityCode, String expirationDate) {
+	public static String processPayment(double amount, String cardName, String cardNumber, String securityCode, String expirationDate, boolean couponActivated) {
 		
 		boolean cardCheck = checkCard(cardName, cardNumber, securityCode, expirationDate);
 		
-		if (cardCheck == true && amount > 0)
-	        return "Payment of $" + amount + " processed successfully.";
-		else if (amount <= 0)
-			return "Payment amount is invalid.";
+		if (cardCheck == true){
+			if (amount > 0)
+				return "Payment of $" + amount + " processed successfully.";
+			else if (amount == 0 && couponActivated == true)
+				return "Free coupon applied - No money was taken from your account.";
+			else
+				return "Payment amount is invalid.";
+		}
 		else
-	        return "Payment rejected due to wrong card information.";
+			return "Payment rejected due to wrong card information.";
 
 	}
 	
